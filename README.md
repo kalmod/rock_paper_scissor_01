@@ -8,3 +8,7 @@ The first iteration of the rock, paper, scissor project. No visual component yet
     - Accepts two parameters: `playerSelection` and `computerSelection`
     - `playerSelection` is user input. 
         -  Should be case insensitive.
+
+3. create a `game` function. :white_check_mark:
+    - This will call playround **5** times. 
+    - keeps `score` and reports winner.

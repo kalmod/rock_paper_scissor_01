@@ -15,8 +15,34 @@ function playRound(playerSelection, computerSelection){
     else return 'You win!'
 }
 
-let playerChoice = (prompt('Please enter Rock, Paper, or Scissors.')).toLowerCase();
-let cpuChoice = getComputerChoice();
+function choices(){
+    let playerChoice = (prompt('Please enter Rock, Paper, or Scissors.')).toLowerCase();
+    let cpuChoice = getComputerChoice();
+    return { playerChoice, cpuChoice } ;
+}
+// 
+// console.log(playRound(playerChoice,cpuChoice))
 
-console.log(`player: ${playerChoice} cpu: ${cpuChoice}`)
-console.log(playRound(playerChoice,cpuChoice))
+function game(rounds=5){
+    let playerScore = 0;
+    let cpuScore = 0;
+    for (let i = 0; i < rounds; i++){
+        let { playerChoice, cpuChoice } = choices();
+        let result = playRound(playerChoice, cpuChoice);
+        console.log(`player: ${playerChoice} | cpu: ${cpuChoice} | result: ${result}`)
+        if (result === 'You win!'){
+            playerScore++;
+        }
+        else if (result == 'You lose.'){
+            //cpuScore++;
+        }
+        // (result === 'You win!') ? playerScore++ : (result === 'You win!') ? cpuScore++ : 0 ;
+    }
+
+    if (playerScore > cpuScore) return 'Congratulations! You won!'
+    else if (playerScore < cpuScore) return 'You lose! Good day Sir!'
+    else return "Draw! Try again next time."
+
+}
+
+console.log(game());
