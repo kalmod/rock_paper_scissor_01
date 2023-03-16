@@ -1,0 +1,123 @@
+body{
+    height: 100svh;
+    margin: 0px;
+    padding: 0px;
+}
+
+#main{
+    background-color: #e5d3b3;
+    height: 100%;
+}
+
+#play-area{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#score-area{
+    flex: .10;
+    border: 1px solid hsl(38, 30%, 51%);
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+}
+
+#score-area > p {
+    margin: 10px;
+    font-family: 'Orbitron';
+}
+
+
+#battleground{
+    flex: 1;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+#battleground > *{
+    display: flex;
+    flex-direction: column;
+}
+
+.choice{
+    font-size: 5em;
+    border: 2px solid black;
+    border-radius: 6px;
+    width: 15vmin;
+    min-width: 115px;
+    aspect-ratio: 2.5 / 3.5;
+    transition: transform 350ms ease, border 350ms;
+    transform: scale(1);
+    position: relative;
+    background-color: hsl(38, 30%, 51%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choice-container{
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+}
+
+#player-choices > .choice-container > .choice:hover{
+    transform: scale(1.2);
+    transition: transform 350ms ease;
+}
+
+.choice-label{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    font-weight: bold;
+    margin: 0;
+    flex: 0.05;
+    font-family: 'Ubuntu';
+    font-size: 24px;
+}
+
+#cpu-choices > .choice-container > .choice::before{
+    content:"";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    background-size: 100% 100%;
+    background-color: rgba(10,10,10,0.4);
+
+}
+
+
+.paper{
+    color: white;
+}
+
+.rock {
+    color: #5A5A5A;
+}
+
+.scissor{
+    color: slategray;
+}
+
+.playerChoice{
+    border: 5px solid green;
+}
+
+.cpuChoice{
+    border: 5px solid red;
+}

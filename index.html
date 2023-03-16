@@ -5,9 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="javascript.js"></script>
+    <script src="javascript.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    
+    <div id="main">
+        <div id="play-area">
+            <div id="score-area">
+                <button>Play</button>
+                <p id="current-score">0 - 0</p>
+                <button>Reset</button>
+            </div>
+            <div id="battleground">
+                <div id="player-choices">
+                    <p class="choice-label">Player Choices</p>
+                    <div class="choice-container">
+                        <div class = "choice"><iconify-icon class="paper" icon="ph:toilet-paper-duotone"></iconify-icon></div>
+                        <div class = "choice"><iconify-icon class="rock" icon="game-icons:rock"></iconify-icon></div>
+                        <div class = "choice"><iconify-icon class="scissor" icon="mingcute:scissors-line"></iconify-icon>
+                    </div>
+                </div>
+                </div>
+                <div id="cpu-choices">
+                    <p class="choice-label">CPU Choices</p>
+                    <div class="choice-container">
+                        <div class = "choice"><iconify-icon class="paper" icon="ph:toilet-paper-duotone"></iconify-icon></div>
+                        <div class = "choice"><iconify-icon class="rock" icon="game-icons:rock"></iconify-icon></div>
+                        <div class = "choice"><iconify-icon class="scissor" icon="mingcute:scissors-line"></iconify-icon></div>
+                </div></div>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>
