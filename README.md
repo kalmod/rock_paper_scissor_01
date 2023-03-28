@@ -16,15 +16,18 @@ The first iteration of the rock, paper, scissor project. No visual component yet
 # Gui Update
 
 Current Status: Made Cards and made Player choices hoverable.
-1. Add title to player and cpu choice.
-2. Add ScoreBoard.
-3. Add Reset button.
+1. Add title to player and cpu choice. :heavy_check_mark:
+2. Add ScoreBoard. :heavy_check_mark:
+3. Add button. :heavy_check_mark:
+    - Play Button
+    - Reset Button
 4. Add animation to Cpu selection.
-5. Make cpu selection Hover and Red.
-6. Selected Player choice is green.
+5. Make cpu selection Hover and Red. :heavy_check_mark:
+6. Selected Player choice is green. :heavy_check_mark:
 
 RESOURCES
 [Convert string to Title Case with JavaScript](https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript)
 [Javascript Enums](https://masteringjs.io/tutorials/fundamentals/enum)
 [Make better RockPaperScissors Comparison](https://stackoverflow.com/questions/53730900/more-efficient-choice-comparison-for-rock-paper-scissors)
 [Fonts](https://stackoverflow.com/questions/33649957/how-to-set-the-font-family-like-a-digital-clock-css)
+[Interval to Stop Game](https://stackoverflow.com/questions/29173956/start-and-stop-loop-in-javascript-with-start-and-stop-button)

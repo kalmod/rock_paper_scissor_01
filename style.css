@@ -1,3 +1,11 @@
+:root{
+    --cpu-inactive-color: rgba(10,10,10,0.4);
+}
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
 body{
     height: 100svh;
     margin: 0px;
@@ -97,7 +105,7 @@ body{
     width: 100%;
     pointer-events: none;
     background-size: 100% 100%;
-    background-color: rgba(10,10,10,0.4);
+    background-color: var(--cpu-inactive-color);
 
 }
 
@@ -116,8 +124,10 @@ body{
 
 .playerChoice{
     border: 5px solid green;
+    transform: scale(1.2);
 }
 
 .cpuChoice{
     border: 5px solid red;
+    transform: scale(1.2);
 }
