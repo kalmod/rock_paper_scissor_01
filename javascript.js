@@ -8,7 +8,10 @@ const resetButton = document.querySelector('#resetButton');
 const scoreBoard = document.querySelector('#current-score');
 
 let playState = 0;
-let playerChoiceMade = false, cpuChoiceMade = false;
+let playerScore = 0, cpuScore = 0;
+let _PLAYERCHOICE = null;
+let _CPUCHOICE = null;
+
 // function getComputerChoice(){
 //     const choices = ['Rock','Paper','Scissors']
 //     let randomChoice = Math.floor(Math.random()*3)
@@ -85,25 +88,58 @@ function game(rounds=5){
 */
 // console.log(game());
 
-function game(){
-    let playerChoice, cpuChoice;
-    if (!playerChoiceMade){
-        console.log('pchoice')
-        playerChoice = (document.querySelector('.playerChoice')).dataset.choice
-        playerChoiceMade = true;
+function playGame(playerChoice,cpuChoice, rounds = 5){
+    const roundResult = playRound(playerChoice,cpuChoice);
+    if (roundResult == 'You Win.'){
+        document.documentElement.style.setProperty('--knock-out-direction', 50);
+        const ele = document.querySelector('.cpuChoice');
+        setTimeout(() =>{ele.classList.add('knockout');},10);
+        
+        playerScore++; 
+        
     }
-    console.log(playerChoice, cpuChoice)
+    else if (roundResult == 'You Lose.'){
+        document.documentElement.style.setProperty('--knock-out-direction', -50);
+        const ele = document.querySelector('.playerChoice')
+        setTimeout(() =>{
+            ele.classList.add('knockout');}, 10 );
+        cpuScore++;
+    }
+    else {
+        
+        document.documentElement.style.setProperty('--player-color', 'blue');
+        document.documentElement.style.setProperty('--cpu-color', 'blue');
+    
+        
+
+    }
+    scoreBoard.textContent = `${playerScore} - ${cpuScore}`
+    setTimeout(() => {removeChoices(listOfPlayerChoices,listOfCpuChoices);}, 500);
+    if (playerScore >= rounds || cpuScore >= rounds){
+        if (playerScore > cpuScore){
+            console.log('You Win. Congrats!');
+        }
+        else{
+            console.log('You Lose. HAH!');
+        }
+        reset();
+    }
 }
 
 function removeChoices(playerChoices, cpuChoices){
     playerChoices.forEach((item,indx) => {
         item.classList.remove('playerChoice')
+        item.classList.remove('knockout')
     })
     cpuChoices.forEach((item,indx) => {
         item.classList.remove('cpuChoice')
+        item.classList.remove('knockout')
         item.style.setProperty('--cpu-inactive-color','rgba(10,10,10,0.4)')
     })
-
+    document.documentElement.style.setProperty('--player-color', 'green');
+    document.documentElement.style.setProperty('--cpu-color', 'red');
+    _PLAYERCHOICE = null;
+    _CPUCHOICE = null;
 }
 
 
@@ -125,13 +161,32 @@ playButton.addEventListener('click',function (e){
     
 })
 
+function reset(){
+    console.log('RESET');
+    playState = 0;
+    playButton.textContent = 'Play';
+    playerScore = 0
+    cpuScore = 0;
+    scoreBoard.textContent = `${playerScore} - ${cpuScore}`
+}
+
+resetButton.addEventListener('click', (e)=>{
+    reset();
+})
+
+
 listOfPlayerChoices.forEach((item,indx)=>{
     item.addEventListener('click', e =>{
         if (playState) {
             item.classList.add('playerChoice');
-            let playerChoice = (document.querySelector('.playerChoice')).dataset.choice
-            let cpuChoice = getComputerChoice();
-            console.log(playerChoice,cpuChoice)
+            _PLAYERCHOICE = (document.querySelector('.playerChoice')).dataset.choice
+            setTimeout(() => {
+                _CPUCHOICE = getComputerChoice();
+                console.log(_PLAYERCHOICE,_CPUCHOICE);
+            }, 1000);
+            
+            setTimeout(() => {playGame(_PLAYERCHOICE,_CPUCHOICE);}, 2000);
+            
         }
     });
 });

@@ -19,11 +19,12 @@ Current Status: Made Cards and made Player choices hoverable.
 1. Add title to player and cpu choice. :heavy_check_mark:
 2. Add ScoreBoard. :heavy_check_mark:
 3. Add button. :heavy_check_mark:
-    - Play Button
-    - Reset Button
-4. Add animation to Cpu selection.
+    - Play Button :heavy_check_mark:
+    - Reset Button :heavy_check_mark:
+4. Add animation to Cpu selection. :heavy_check_mark:
 5. Make cpu selection Hover and Red. :heavy_check_mark:
 6. Selected Player choice is green. :heavy_check_mark:
+7. Add message prompt.
 
 RESOURCES
 [Convert string to Title Case with JavaScript](https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript)

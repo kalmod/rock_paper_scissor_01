@@ -1,5 +1,8 @@
 :root{
     --cpu-inactive-color: rgba(10,10,10,0.4);
+    --knock-out-direction: 50;
+    --player-color: green;
+    --cpu-color: #ff0000;
 }
 
 *, *::before, *::after{
@@ -39,6 +42,8 @@ body{
 #score-area > p {
     margin: 10px;
     font-family: 'Orbitron';
+    width: 200px;
+    text-align: center;
 }
 
 
@@ -109,6 +114,9 @@ body{
 
 }
 
+.knockout{
+    animation: .25s linear 0s forwards knockout-frames;
+}
 
 .paper{
     color: white;
@@ -123,11 +131,24 @@ body{
 }
 
 .playerChoice{
-    border: 5px solid green;
+    border: 5px solid var(--player-color);
     transform: scale(1.2);
 }
 
 .cpuChoice{
-    border: 5px solid red;
+    border: 5px solid var(--cpu-color);
     transform: scale(1.2);
+}
+
+@keyframes knockout-frames {
+    0% {
+        transform: scale(1.2) translateX(0px);
+    }
+    50%{
+        transform: scale(1.2) translateX(calc(var(--knock-out-direction)*1px));
+    }
+    100%{
+        transform: scale(1.2) translateX(0px);
+    }
+    
 }
