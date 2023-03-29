@@ -7,17 +7,12 @@ const playButton = document.querySelector('#playButton');
 const resetButton = document.querySelector('#resetButton');
 const scoreBoard = document.querySelector('#current-score');
 
+const roundMessages = document.querySelector('#round-messages > p');
+
 let playState = 0;
 let playerScore = 0, cpuScore = 0;
 let _PLAYERCHOICE = null;
 let _CPUCHOICE = null;
-
-// function getComputerChoice(){
-//     const choices = ['Rock','Paper','Scissors']
-//     let randomChoice = Math.floor(Math.random()*3)
-//     return choices[randomChoice]
-// }
-
 
 function getComputerChoice(){
     const choices = ['Rock','Paper','Scissors']
@@ -44,57 +39,13 @@ function playRound(playerSelection, computerSelection){
     else return 'DRAW!'
 }
 
-// function choices(){
-//     let playerChoice = (prompt('Please enter Rock, Paper, or Scissors.'));
-//     playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.substring(1).toLowerCase();
-//     let cpuChoice = getComputerChoice();
-//     return { playerChoice, cpuChoice } ;
-// }
-
-// function choices(){
-//     let chosen = (document.querySelector('.playerChoice')).dataset.choice
-//     let playerChoice = chosen.dataset.choice
-//     if (chosen){
-//         let cpuChoice = getComputerChoice();
-//     }
-//     return { playerChoice, cpuChoice } ;
-// }
-
-
-// 
-// console.log(playRound(playerChoice,cpuChoice))
-/*
-function game(rounds=5){
-    let playerScore = 0;
-    let cpuScore = 0;
-    for (let i = 0; i < rounds; i++){
-        let { playerChoice, cpuChoice } = choices();
-        let result = playRound(playerChoice, cpuChoice);
-        console.log(`player: ${playerChoice} | cpu: ${cpuChoice} | result: ${result}`)
-        if (result === 'You Win.'){
-            playerScore++;
-        }
-        else if (result == 'You Lose.'){
-            cpuScore++;
-        }
-        // (result === 'You win!') ? playerScore++ : (result === 'You win!') ? cpuScore++ : 0 ;
-    }
-    console.log(`${playerScore} - ${cpuScore}`)
-    if (playerScore > cpuScore) return 'Congratulations! You won!'
-    else if (playerScore < cpuScore) return 'You lose! Good day Sir!'
-    else return "Draw! Try again next time."
-
-}
-*/
-// console.log(game());
-
 function playGame(playerChoice,cpuChoice, rounds = 5){
     const roundResult = playRound(playerChoice,cpuChoice);
     if (roundResult == 'You Win.'){
         document.documentElement.style.setProperty('--knock-out-direction', 50);
         const ele = document.querySelector('.cpuChoice');
         setTimeout(() =>{ele.classList.add('knockout');},10);
-        
+        roundMessages.textContent = `${roundResult}`
         playerScore++; 
         
     }
@@ -103,37 +54,53 @@ function playGame(playerChoice,cpuChoice, rounds = 5){
         const ele = document.querySelector('.playerChoice')
         setTimeout(() =>{
             ele.classList.add('knockout');}, 10 );
+        roundMessages.textContent = `${roundResult}`
         cpuScore++;
     }
     else {
         
         document.documentElement.style.setProperty('--player-color', 'blue');
         document.documentElement.style.setProperty('--cpu-color', 'blue');
-    
+        roundMessages.textContent = `${roundResult}`
         
 
     }
     scoreBoard.textContent = `${playerScore} - ${cpuScore}`
     setTimeout(() => {removeChoices(listOfPlayerChoices,listOfCpuChoices);}, 500);
+    setTimeout(() => {roundMessages.textContent ='';}, 900);
     if (playerScore >= rounds || cpuScore >= rounds){
         if (playerScore > cpuScore){
             console.log('You Win. Congrats!');
+            roundMessages.textContent = 'You Win. Congrats!';
         }
         else{
             console.log('You Lose. HAH!');
+            roundMessages.textContent = 'You Lose. HAH!';
         }
         reset();
     }
+}
+
+
+function makeInactive(playerChoices, cpuChoices){
+    playerChoices.forEach((item,indx) => {
+        item.classList.add('nowInactive')
+    })
+    cpuChoices.forEach((item,indx) => {
+        item.classList.add('nowInactive')
+    })
 }
 
 function removeChoices(playerChoices, cpuChoices){
     playerChoices.forEach((item,indx) => {
         item.classList.remove('playerChoice')
         item.classList.remove('knockout')
+        item.classList.remove('nowInactive')
     })
     cpuChoices.forEach((item,indx) => {
         item.classList.remove('cpuChoice')
         item.classList.remove('knockout')
+        item.classList.remove('nowInactive')
         item.style.setProperty('--cpu-inactive-color','rgba(10,10,10,0.4)')
     })
     document.documentElement.style.setProperty('--player-color', 'green');
@@ -168,6 +135,7 @@ function reset(){
     playerScore = 0
     cpuScore = 0;
     scoreBoard.textContent = `${playerScore} - ${cpuScore}`
+    setTimeout(() => {roundMessages.textContent ='';}, 1000);
 }
 
 resetButton.addEventListener('click', (e)=>{
@@ -175,11 +143,15 @@ resetButton.addEventListener('click', (e)=>{
 })
 
 
+
+
+
 listOfPlayerChoices.forEach((item,indx)=>{
     item.addEventListener('click', e =>{
         if (playState) {
             item.classList.add('playerChoice');
             _PLAYERCHOICE = (document.querySelector('.playerChoice')).dataset.choice
+            makeInactive(listOfPlayerChoices,listOfCpuChoices);
             setTimeout(() => {
                 _CPUCHOICE = getComputerChoice();
                 console.log(_PLAYERCHOICE,_CPUCHOICE);

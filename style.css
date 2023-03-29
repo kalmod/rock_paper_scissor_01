@@ -13,11 +13,13 @@ body{
     height: 100svh;
     margin: 0px;
     padding: 0px;
+    font-family: 'Ubuntu';
 }
 
 #main{
     background-color: #e5d3b3;
     height: 100%;
+    caret-color: transparent;
 }
 
 #play-area{
@@ -27,6 +29,19 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#round-messages{
+    flex: .10;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+}
+#round-messages > p {
+    margin: 0;
+
 }
 
 #score-area{
@@ -96,7 +111,6 @@ body{
     font-weight: bold;
     margin: 0;
     flex: 0.05;
-    font-family: 'Ubuntu';
     font-size: 24px;
 }
 
@@ -115,7 +129,8 @@ body{
 }
 
 .knockout{
-    animation: .25s linear 0s forwards knockout-frames;
+    animation: .25s linear 0s forwards knockout-frames,
+    linear .25s .3s forwards knockout-scale-down;
 }
 
 .paper{
@@ -140,15 +155,20 @@ body{
     transform: scale(1.2);
 }
 
+
+.nowInactive{
+    pointer-events: none;
+}
+
 @keyframes knockout-frames {
-    0% {
+    0%, 100% {
         transform: scale(1.2) translateX(0px);
     }
     50%{
         transform: scale(1.2) translateX(calc(var(--knock-out-direction)*1px));
     }
-    100%{
-        transform: scale(1.2) translateX(0px);
-    }
-    
+}
+@keyframes knockout-scale-down {
+    from { transform: scale(1.2); }
+    to { transform: scale(1.0);}
 }
